@@ -70,11 +70,7 @@ namespace WebTask
             services.AddScoped<IUserService, UserService>();
         }
 
-        private void fgf(DbContextOptionsBuilder obj)
-        {
-            
-        }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DBContext context)
         {
@@ -97,63 +93,12 @@ namespace WebTask
                 endpoints.MapControllers();
             });
 
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
 
-            PrepareDB(context);
-        }
-        private void ConfigureJSON1(JsonOptions obj)
-        {
-            //obj.JsonSerializerOptions.
-        }
-        //private void ConfigureJSON(MvcJsonOptions obj)
-        //{
-        //    obj.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-        //}
-        private void PrepareDB(DBContext context)
-        {
-            User u1 = new User { Id = 1000, FirstName = "Daimel", LastName = "Rodriguez Torres", Email = "hackerprodlive@gmail.com", Username = "Hackerprod", Password = "loops", Role = Role.Admin };
-            User u2 = new User { Id = 1001, FirstName = "Dayron", LastName = "Alfaro Gonzales", Email = "Jst4rk@gmail.com", Username = "Jhon", Password = "jhon", Role = Role.Seller };
-            User u3 = new User { Id = 1002, FirstName = "Julio", LastName = "Garcia Hernandez", Email = "stickm4n@gmail.com", Username = "Stick", Password = "stick", Role = Role.Client };
-
-            if (!context.Users.Any())
-            {
-                context.Users.Add(u1);
-                context.Users.Add(u2);
-                context.Users.Add(u3);
-            }
-
-
-            Product p1 = new Product { ProductID = 1, Slug = Extensions.GetUniqueAlphaNumericID(), Name = "Mouse", CreatedByUser = 1000, Description = "Mouse, Color Red", Price = 12 };
-            Product p2 = new Product { ProductID = 2, Slug = Extensions.GetUniqueAlphaNumericID(), Name = "Mouse", CreatedByUser = 1000, Description = "Mouse, Color Blue", Price = 18 };
-            Product p3 = new Product { ProductID = 3, Slug = Extensions.GetUniqueAlphaNumericID(), Name = "Motherboard", CreatedByUser = 1001, Description = "Asus ROG Maximus Hero VI", Price = 251 };
-            Product p4 = new Product { ProductID = 4, Slug = Extensions.GetUniqueAlphaNumericID(), Name = "Keyboard", CreatedByUser = 1002, Description = "Gamer keyboard", Price = 10 };
-
-            ProductCard pc1 = new ProductCard() { Product = p1, Quantity = 3 };
-            ProductCard pc2 = new ProductCard() { Product = p2, Quantity = 1 };
-            ProductCard pc3 = new ProductCard() { Product = p3, Quantity = 2 };
-            ProductCard pc4 = new ProductCard() { Product = p4, Quantity = 10 };
-
-            if (!context.Products.Any())
-            {
-                context.Products.Add(pc1);
-                context.Products.Add(pc2);
-                context.Products.Add(pc3);
-                context.Products.Add(pc4);
-            }
             
-
-            Order o1 = new Order { OrderId = 1, Quantity = 1, State = OrdenStatus.Created, OrderUserId = u2.Id, Product = p1, DateCreated = new DateTime(2019, 4, 26) };
-            Order o2 = new Order { OrderId = 2, Quantity = 4, State = OrdenStatus.Created, OrderUserId = u3.Id, Product = p1, DateCreated = new DateTime(2020, 4, 21) };
-
-            if (!context.Orders.Any())
-            {
-                context.Orders.Add(o1);
-                context.Orders.Add(o2);
-            }
-
-            context.SaveChanges();
-
         }
+        
+        
 
     }
 }
