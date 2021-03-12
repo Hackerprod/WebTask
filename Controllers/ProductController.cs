@@ -13,7 +13,7 @@ using WebTask.Database;
 
 namespace WebTask.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("products/")]
     public class ProductController : Controller
     {
@@ -31,7 +31,7 @@ namespace WebTask.Controllers
         {
             return Ok(Context.GetProductCards());
         }
-
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult GetbyId(int id)
         {
@@ -99,6 +99,7 @@ namespace WebTask.Controllers
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             ProductCard product = Context.GetProductCard(id);
