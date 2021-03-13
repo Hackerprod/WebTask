@@ -27,6 +27,7 @@ namespace WebTask.Controllers
 
         // GET: api/<controller>
         [HttpGet]
+        [Authorize]
         public ActionResult Get()
         {
             return Ok(Context.GetOrders());
@@ -34,6 +35,7 @@ namespace WebTask.Controllers
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult GetbyId(int id)
         {
             Order product = Context.Orders
@@ -91,6 +93,7 @@ namespace WebTask.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult ConfirmOrder(int id)
         {
             // only allow admins to access
@@ -114,6 +117,7 @@ namespace WebTask.Controllers
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult CancelOrder(int id)
         {
             // only allow admins to access
